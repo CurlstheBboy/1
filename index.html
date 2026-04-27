@@ -1,25 +1,419 @@
-<section id="about" class="about-section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            
-            <div style="text-align: center; margin-bottom: 30px;">
-                <img src="Central_Bank_of_ROC_Main_Building_20230510.jpg" alt="中央銀行大樓" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            </div>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蔡博丞 Po-Cheng Tsai | 個人網站</title>
+    
+    <style>
+        /* 基礎設定與變數 - 睿智藍與活力金 */
+        :root {
+            --bg-main: #FFFFFF; /* 純白背景，象徵專業與透明 */
+            --bg-alt: #F4F7F6;  /* 淺灰藍背景，用於區塊區隔 */
+            --text-primary: #1A202C; /* 深藍灰文字，穩重易讀 */
+            --text-secondary: #4A5568; /* 中灰文字 */
+            --accent-primary: #0056D2; /* 睿智藍 - 專業與信任 */
+            --accent-secondary: #D4AF37; /* 活力金 - 成就與能量 */
+            --accent-light: #63B3ED; /* 青空藍 - 創新與輕盈 */
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --navbar-height: 80px;
+        }
 
-            <div class="about-content">
-                <p>
-                    您好，我是蔡博丞。我專注於總體經濟、貨幣政策與金融市場的深度研究與實務應用。
-                </p>
-                
-                <ul class="credentials-list">
-                    <li><span>現職</span> 中央銀行</li>
-                    <li><span>學歷</span> 英國劍橋大學 經濟系博士</li>
-                    <li><span>專業認證</span> 會計師 (CPA)、特許金融分析師 (CFA)、保險代理人</li>
-                </ul>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-                <p>
-                    除了深厚的學術底蘊與金融硬實力，我也具備 Python 數據分析能力，能為複雜的金融體系帶來具邏輯性的見解。
-                </p>
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.8;
+        }
+
+        /* 共用容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        a {
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 導覽列 - 輕盈透明感 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--navbar-height);
+            padding: 0 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* 共用區塊設定 */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            height: 4px;
+            width: 60px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-light));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Hero 區塊 - 中央銀行圖片要在上面 (作為橫幅背景) */
+        .hero-section {
+            padding: 0;
+            margin-top: var(--navbar-height);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 這是央行照片，臣妾將它設為 Hero 區塊的氣派背景 */
+        .hero-image-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Central_Bank_of_ROC_Main_Building_20230510.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.65); /* 稍微調暗，讓前景文字更清晰 */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* 確保內容在圖片上方 */
+            color: #FFFFFF; /* 在圖片上的文字使用白色 */
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .greeting {
+            color: var(--accent-light);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .name-title {
+            font-size: clamp(45px, 9vw, 75px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+        }
+
+        .en-name {
+            display: block;
+            font-size: 0.6em;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
+        }
+
+        .one-liner {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* 按鈕樣式 - 專業藍與活力金的選擇 */
+        .btn-group {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px; /* 圓角設計更顯活潑 */
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #FFFFFF;
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-outline:hover {
+            background-color: #FFFFFF;
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        /* About 區塊 - 改為雙欄排版，更平衡專業 */
+        .about-section {
+            background-color: var(--bg-main);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 左右分欄 */
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* 成就清單樣式 - 卡片化設計，活潑清晰 */
+        .credentials-list {
+            grid-column: 1 / -1; /* 清單單獨佔用下方整列 */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .credentials-list li {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05); /* 柔和的陰影 */
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--accent-primary);
+        }
+
+        .credentials-list li:hover {
+            transform: translateY(-10px);
+            border-top: 5px solid var(--accent-secondary); /* Hover時變活力金 */
+        }
+
+        .credentials-list li span.cred-type {
+            color: var(--accent-secondary); /* 項目類別用活力金 */
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .credentials-list li.cred-title {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* Contact 區塊 - 乾淨、集中 */
+        .contact-section {
+            background-color: var(--bg-alt);
+            text-align: center;
+        }
+
+        .contact-text {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .contact-item {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent-primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            background-color: #FFFFFF;
+        }
+
+        .contact-item:hover {
+            background-color: var(--accent-primary);
+            color: #FFFFFF;
+            transform: scale(1.05);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr; /* 手機版改回單欄 */
+                text-align: center;
+            }
+            .name-title {
+                font-size: clamp(35px, 8vw, 60px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 20px;
+            }
+            .nav-links {
+                gap: 20px;
+            }
+            .btn-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CBC.</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero-section">
+        <div class="hero-image-bg"></div>
+        
+        <div class="container hero-content">
+            <p class="greeting">Dr. Po-Cheng Tsai</p>
+            <h1 class="name-title">蔡博丞 <span class="en-name">Central Bank Economic Specialist</span></h1>
+            <p class="one-liner">
+                英國劍橋大學經濟系博士，現任職於中央銀行。<br>
+                具備會計師 (CPA)、CFA 及保險代理人執照，專注於總體經濟與貨幣政策領域。
+            </p>
+            <div class="btn-group">
+                <a href="#about" class="btn btn-primary">專業資歷</a>
+                <a href="#contact" class="btn btn-outline">聯繫合作</a>
             </div>
         </div>
     </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title"> About & Expertise</h2>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        您好，我是蔡博丞。我致力於總體經濟學、貨幣政策決策與金融市場動態的深度研究，將嚴謹的學術分析與實務政策應用相結合。
+                    </p>
+                    <p>
+                        除了深厚的學術底蘊與金融硬實力，我也具備 Python 數據分析能力，能為複雜的金融體系帶來邏輯性的前瞻見解，在創新中尋求穩定。
+                    </p>
+                </div>
+                
+                <div style="background-color: var(--bg-alt); padding: 40px; border-radius: 12px; text-align: center;">
+                   <p style="font-size: 1.5rem; color: var(--accent-primary); font-weight: 700;">經濟政策與金融數據的橋樑</p>
+                </div>
+            </div>
+
+            <ul class="credentials-list">
+                <li>
+                    <span class="cred-type">現職</span>
+                    <p class="cred-title">中央銀行</p>
+                </li>
+                <li>
+                    <span class="cred-type">學歷</span>
+                    <p class="cred-title">英國劍橋大學<br>經濟系博士</p>
+                </li>
+                <li>
+                    <span class="cred-type">專業認證</span>
+                    <p class="cred-title">會計師 (CPA)<br>特許金融分析師 (CFA)</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title"> Get In Touch</h2>
+            <p class="contact-text">無論是探討總經趨勢、金融數據分析，或任何學術與實務合作機會，都歡迎隨時聯繫。</p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com" class="contact-item">Email Me</a>
+                <a href="https://github.com/CurlstheBboy" target="_blank" class="contact-item">GitHub</a>
+                <a href="https://linkedin.com/" target="_blank" class="contact-item">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
